@@ -1,23 +1,48 @@
-<?php
+<!DOCTYPE html>
+<html>
+  <?php include('module/header.php'); ?>
+  
+  <body class="skin-blue sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
 
-session_start();
+      <?php include('module/topbar.php'); ?>
 
-if(!isset($_SESSION['username'])){
-	
-	header('location:login.php');
-}
+      <!-- =============================================== -->
 
-require('config/database.php');
+      <!-- Left side column. contains the sidebar -->
+      <?php include('module/sidebar.php'); ?>
 
-include('config/app.php');
+      <!-- =============================================== -->
 
-if(!empty($_GET['report'])) {
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <?php 
 
-	include('template/report.php');
-} 
-else {
+        if(!empty($_GET['module'])) {
 
-	include('template/index.php');
-}
+          $module=$_GET['module'];
+          include('module/'.$module.'.php');
+        } else {
 
-?>
+          include('module/dashboard.php');
+        }
+
+        ?>
+        <!-- /.content -->
+      </div><!-- /.content-wrapper -->
+
+      <?php include('module/footer.php'); ?>
+
+      <!-- Control Sidebar -->
+      <!-- /.control-sidebar -->
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <div class="control-sidebar-bg"></div>
+    </div><!-- ./wrapper -->
+
+    <!-- jQuery 2.1.4 -->
+    <?php include('module/script.php'); ?>
+  </body>
+</html>
